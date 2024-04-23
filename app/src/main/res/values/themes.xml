@@ -6,4 +6,9 @@
     </style>
 
     <style name="Theme.ElfiliQuizApp" parent="Base.Theme.ElfiliQuizApp" />
+    <style name="Theme.Pampanitikan.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <style name="ShapeAppearanceOverlay.Avatar" parent="ShapeAppearance.MaterialComponents.SmallComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">10%</item>
+    </style>
 </resources>
