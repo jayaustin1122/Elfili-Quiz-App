@@ -19,6 +19,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.io.Serializable
 
 class HomeFragment : Fragment(),Myadapter2.OnItemClickListener2  {
     private var _binding: FragmentHomeBinding? = null
@@ -65,6 +66,7 @@ class HomeFragment : Fragment(),Myadapter2.OnItemClickListener2  {
             }
         }
 
+
     }
 
     override fun onDestroyView() {
@@ -78,7 +80,8 @@ class HomeFragment : Fragment(),Myadapter2.OnItemClickListener2  {
             putInt("imageResId", data.imageResId)
             putString("title", getString(data.titleResId))
             putString("content", getString(data.contentResId))
-            putInt("audio", data.audioResId) // Pass audio resource ID as integer
+            putInt("audio", data.audioResId)
+            putSerializable("quizQuestions", data.quizQuestions as Serializable) // Pass quiz questions
         }
         val detailFragment = DetailFragment()
         detailFragment.arguments = bundle
@@ -87,4 +90,5 @@ class HomeFragment : Fragment(),Myadapter2.OnItemClickListener2  {
             .addToBackStack(null)
             .commit()
     }
+
 }

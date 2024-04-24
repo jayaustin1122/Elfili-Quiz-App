@@ -9,6 +9,8 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.elfiliquizapp.R
 import com.example.elfiliquizapp.databinding.FragmentDetailBinding
+import com.example.elfiliquizapp.table.QuizQuestion
+import java.io.Serializable
 
 class DetailFragment : Fragment() {
     private var _binding: FragmentDetailBinding? = null
@@ -51,6 +53,23 @@ class DetailFragment : Fragment() {
         binding.pause.setOnClickListener {
             pauseSound()
         }
+        binding.btnQuiz.setOnClickListener {
+            val quizQuestions = arguments?.getSerializable("quizQuestions") as? List<QuizQuestion>
+            if (quizQuestions != null) {
+                val bundle = Bundle().apply {
+                    putSerializable("quizQuestions", quizQuestions as Serializable)
+                }
+                val quizFragment = QuizFragment()
+                quizFragment.arguments = bundle
+                requireActivity().supportFragmentManager.beginTransaction()
+                    .replace(R.id.fragmentContainerView, quizFragment)
+                    .addToBackStack(null)
+                    .commit()
+            } else {
+                // Handle the case where quizQuestions is null or not an instance of List<QuizQuestion>
+            }
+        }
+
         return view
     }
     private fun playSound(audioResId: Int) {
