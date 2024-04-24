@@ -78,6 +78,7 @@ class HomeFragment : Fragment(),Myadapter2.OnItemClickListener2  {
             putInt("imageResId", data.imageResId)
             putString("title", getString(data.titleResId))
             putString("content", getString(data.contentResId))
+            putInt("audio", data.audioResId) // Pass audio resource ID as integer
         }
         val detailFragment = DetailFragment()
         detailFragment.arguments = bundle
