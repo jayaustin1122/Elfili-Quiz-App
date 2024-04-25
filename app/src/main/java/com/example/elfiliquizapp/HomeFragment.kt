@@ -6,11 +6,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.activity.OnBackPressedCallback
+import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.addCallback
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.navigation.fragment.findNavController
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.elfiliquizapp.database.ElfiliDatabase
 import com.example.elfiliquizapp.database.UserDao
@@ -40,7 +41,7 @@ class HomeFragment : Fragment(),Myadapter2.OnItemClickListener2  {
 
 
         userDao = ElfiliDatabase.invoke(requireContext()).getUserDao()
-
+        displayUserByPosition("99", _binding.name)
         // Initialize RecyclerView adapter
         adapter2 = Myadapter2(requireContext())
         adapter2.setOnItemClickListener(this)
@@ -72,11 +73,13 @@ class HomeFragment : Fragment(),Myadapter2.OnItemClickListener2  {
     }
 
 
-    override fun onItemClick2(data: Datas) {
+    override fun onItemClick2(position: Int, data: Datas) {
         // Navigate to new fragment and pass data
         val bundle = Bundle().apply {
             putInt("imageResId", data.imageResId)
             putString("title", getString(data.titleResId))
+            putString("position", position.toString())
+            Toast.makeText(requireContext(),"$position",Toast.LENGTH_SHORT).show()
             putString("content", getString(data.contentResId))
             putInt("audio", data.audioResId)
             putSerializable("quizQuestions", data.quizQuestions as Serializable) // Pass quiz questions
@@ -88,5 +91,14 @@ class HomeFragment : Fragment(),Myadapter2.OnItemClickListener2  {
             .addToBackStack(null)
             .commit()
     }
+    private fun displayUserByPosition(position: String, textView: TextView) {
+        lifecycleScope.launch(Dispatchers.IO) {
+            // Retrieve the user from the database by position
+            val user = userDao.getKabanata(position)
+            if (user != null) {
+                textView.text = user.name
+            }
 
+        }
+    }
 }

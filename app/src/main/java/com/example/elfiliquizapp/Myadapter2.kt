@@ -16,7 +16,7 @@ class Myadapter2(private val context: Context) :
     private var itemClickListener2: OnItemClickListener2? = null
 
     interface OnItemClickListener2 {
-        fun onItemClick2(data: Datas)
+        fun onItemClick2(position: Int, data: Datas)
     }
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
@@ -31,7 +31,7 @@ class Myadapter2(private val context: Context) :
         override fun onClick(v: View?) {
             val position = adapterPosition
             if (position != RecyclerView.NO_POSITION) {
-                itemClickListener2?.onItemClick2(dataList2[position])
+                itemClickListener2?.onItemClick2(position,dataList2[position])
             }
         }
     }

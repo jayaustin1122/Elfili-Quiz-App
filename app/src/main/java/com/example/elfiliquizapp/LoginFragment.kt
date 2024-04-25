@@ -1,6 +1,7 @@
 package com.example.elfiliquizapp
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -13,6 +14,7 @@ import com.example.elfiliquizapp.databinding.FragmentLoginBinding
 import com.example.elfiliquizapp.table.User
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 
 class LoginFragment : Fragment() {
@@ -39,15 +41,17 @@ class LoginFragment : Fragment() {
             if (username.isNotEmpty()) {
                 // Save the username into the database
                 lifecycleScope.launch(Dispatchers.IO) {
-                    userDao.insertUser(User(name = username))
+                    userDao.insertUser(User(name = username, number = 99, position = "99", isBoolean = false))
+                    withContext(Dispatchers.Main) {
+                        // This code block will execute on the main thread
+                        Log.d("LoginFragment", "User inserted successfully: $username")
+                        // Navigate to the home fragment
+                        findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
+                    }
                 }
-
-                // Navigate to the home fragment on the main thread
-                findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
-                requireActivity().supportFragmentManager.popBackStack()
-
             }
         }
+
 
     }
 }

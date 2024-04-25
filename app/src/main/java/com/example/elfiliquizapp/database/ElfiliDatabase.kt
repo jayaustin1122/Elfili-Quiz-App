@@ -29,7 +29,7 @@ abstract class ElfiliDatabase : RoomDatabase() {
         private fun buildDatabase(context:Context) = Room.databaseBuilder(
             context.applicationContext,
             ElfiliDatabase::class.java,
-            "elfili"
+            "elfili.db"
         ).build()
 
     }
