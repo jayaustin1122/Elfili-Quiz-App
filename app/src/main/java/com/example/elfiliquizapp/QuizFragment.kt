@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.elfiliquizapp.adapter.QuizAdapter
 import com.example.elfiliquizapp.databinding.FragmentQuizBinding
@@ -27,20 +28,31 @@ class QuizFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val quizQuestions = arguments?.getSerializable("quizQuestions") as? List<QuizQuestion>
-        // Retrieve quiz questions from arguments
-
-        // Initialize RecyclerView and adapter
+        this.quizQuestions = quizQuestions
         quizAdapter = QuizAdapter(quizQuestions ?: emptyList())
         binding.quizRecyclerView.apply {
             adapter = quizAdapter
             layoutManager = LinearLayoutManager(requireContext())
         }
 
+
         // Set click listener for the submit button
         binding.submitButton.setOnClickListener {
-            // Handle submission of answers
+            val correctAnswers = evaluateAnswers()
+            Toast.makeText(requireContext(), "You got $correctAnswers correct answers!", Toast.LENGTH_SHORT).show()
         }
 
+
+    }
+    private fun evaluateAnswers(): Int {
+        var correctAnswers = 0
+        quizQuestions?.forEachIndexed { index, question ->
+            val selectedOptionIndex = quizAdapter.getSelectedOptionIndex(index)
+            if (selectedOptionIndex == question.correctAnswer) {
+                correctAnswers++
+            }
+        }
+        return correctAnswers
     }
 
 }

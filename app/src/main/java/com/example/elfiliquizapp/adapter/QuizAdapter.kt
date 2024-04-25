@@ -1,5 +1,4 @@
 package com.example.elfiliquizapp.adapter
-
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.RadioButton
@@ -10,15 +9,22 @@ import com.example.elfiliquizapp.table.QuizQuestion
 class QuizAdapter(private val quizQuestions: List<QuizQuestion>) :
     RecyclerView.Adapter<QuizAdapter.QuizViewHolder>() {
 
+    // Array to store the selected option index for each question
+    private val selectedOptions = Array(quizQuestions.size) { -1 }
+
     inner class QuizViewHolder(private val binding: ItemQuizQuestionBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(question: QuizQuestion) {
+        fun bind(question: QuizQuestion, position: Int) {
             binding.questionTextView.text = question.question
             binding.optionsRadioGroup.removeAllViews()
-            question.options.forEach { option ->
+            question.options.forEachIndexed { index, option ->
                 val radioButton = RadioButton(itemView.context)
                 radioButton.text = option
+                radioButton.setOnClickListener {
+                    // Update the selected option index for this question
+                    selectedOptions[position] = index
+                }
                 binding.optionsRadioGroup.addView(radioButton)
             }
         }
@@ -31,10 +37,16 @@ class QuizAdapter(private val quizQuestions: List<QuizQuestion>) :
     }
 
     override fun onBindViewHolder(holder: QuizViewHolder, position: Int) {
-        holder.bind(quizQuestions[position])
+        holder.bind(quizQuestions[position], position)
     }
 
     override fun getItemCount(): Int {
         return quizQuestions.size
     }
+
+    // Function to get the selected option index for a given question position
+    fun getSelectedOptionIndex(position: Int): Int {
+        return selectedOptions[position]
+    }
 }
+

@@ -4,6 +4,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
 import com.example.elfiliquizapp.table.User
+import com.example.elfiliquizapp.table.UserPoints
 
 @Dao
 interface UserDao {
@@ -12,4 +13,5 @@ interface UserDao {
 
     @Query("SELECT * FROM User LIMIT 1")
     suspend fun getSingleUser(): User?
+
 }

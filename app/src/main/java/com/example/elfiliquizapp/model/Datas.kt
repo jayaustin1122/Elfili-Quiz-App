@@ -8,5 +8,6 @@ data class Datas(
     @StringRes val titleResId: Int,
     @StringRes val contentResId: Int,
     val audioResId: Int , // Add audio resource ID
-    val quizQuestions: List<QuizQuestion>
+    val quizQuestions: List<QuizQuestion>,
+    val taken : Boolean
 )
