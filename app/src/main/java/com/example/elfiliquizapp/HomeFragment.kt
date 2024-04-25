@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
+import androidx.activity.addCallback
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -22,8 +23,7 @@ import kotlinx.coroutines.withContext
 import java.io.Serializable
 
 class HomeFragment : Fragment(),Myadapter2.OnItemClickListener2  {
-    private var _binding: FragmentHomeBinding? = null
-    private val binding get() = _binding!!
+    private lateinit var _binding: FragmentHomeBinding
     private lateinit var userDao: UserDao
     private val homeViewModel2: HomeViewModel2 by viewModels()
     private lateinit var adapter2: Myadapter2
@@ -32,8 +32,8 @@ class HomeFragment : Fragment(),Myadapter2.OnItemClickListener2  {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentHomeBinding.inflate(inflater, container, false)
-        return binding.root
+        _binding = FragmentHomeBinding.inflate(layoutInflater)
+        return _binding.root
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -44,11 +44,13 @@ class HomeFragment : Fragment(),Myadapter2.OnItemClickListener2  {
         // Initialize RecyclerView adapter
         adapter2 = Myadapter2(requireContext())
         adapter2.setOnItemClickListener(this)
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
 
+        }
         // Set RecyclerView adapter
-        binding.cropRecycler1.adapter = adapter2
+        _binding.cropRecycler1.adapter = adapter2
         // Set GridLayoutManager with 2 spans
-        binding.cropRecycler1.layoutManager = GridLayoutManager(requireContext(), 2)
+        _binding.cropRecycler1.layoutManager = GridLayoutManager(requireContext(), 2)
 
         // Observe dataList from ViewModel
         homeViewModel2.dataList.observe(viewLifecycleOwner, Observer {
@@ -61,7 +63,7 @@ class HomeFragment : Fragment(),Myadapter2.OnItemClickListener2  {
             currentUser?.let {
                 // Switch to the main thread to update UI
                 withContext(Dispatchers.Main) {
-                    binding.name.text = currentUser.name
+                    _binding.name.text = currentUser.name
                 }
             }
         }
@@ -69,10 +71,6 @@ class HomeFragment : Fragment(),Myadapter2.OnItemClickListener2  {
 
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
 
     override fun onItemClick2(data: Datas) {
         // Navigate to new fragment and pass data

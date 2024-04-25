@@ -33,17 +33,7 @@ class DetailFragment : Fragment() {
         binding.imageView.setImageResource(imageResId)
         binding.textTitle.text = title
         binding.textContent.text = content
-        // Handle back button press
-        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
-            override fun handleOnBackPressed() {
-                // Navigate to another fragment when back button is pressed
-                val detailFragment = HomeFragment()
-                requireActivity().supportFragmentManager.beginTransaction()
-                    .replace(R.id.fragmentContainerView, detailFragment)
-                    .addToBackStack(null)
-                    .commit()
-            }
-        })
+
         binding.play.setOnClickListener {
             playSound(audioResId)
         }

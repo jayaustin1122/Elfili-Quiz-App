@@ -41,8 +41,11 @@ class LoginFragment : Fragment() {
                 lifecycleScope.launch(Dispatchers.IO) {
                     userDao.insertUser(User(name = username))
                 }
+
                 // Navigate to the home fragment on the main thread
                 findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
+                requireActivity().supportFragmentManager.popBackStack()
+
             }
         }
 

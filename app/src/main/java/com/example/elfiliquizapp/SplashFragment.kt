@@ -41,11 +41,15 @@ class SplashFragment : Fragment() {
                 // Users are registered, navigate to home screen
                 withContext(Dispatchers.Main) {
                     findNavController().navigate(R.id.action_splashFragment_to_homeFragment)
+
+
                 }
             } else {
                 // No users registered, navigate to login screen
                 withContext(Dispatchers.Main) {
                     findNavController().navigate(R.id.action_splashFragment_to_loginFragment)
+
+
                 }
             }
         }
