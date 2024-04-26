@@ -9,7 +9,9 @@ import android.view.ViewGroup
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.elfiliquizapp.database.ElfiliDatabase
+import com.example.elfiliquizapp.database.KabanataDao
 import com.example.elfiliquizapp.database.UserDao
+import com.example.elfiliquizapp.model.Kabanata
 import com.example.elfiliquizapp.table.User
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -18,6 +20,7 @@ import kotlinx.coroutines.withContext
 class SplashFragment : Fragment() {
 
     private lateinit var userDao: UserDao
+    private lateinit var kabanataDao: KabanataDao
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -43,7 +46,7 @@ class SplashFragment : Fragment() {
                 }
             } else {
                 // No users registered, insert initial data and navigate to login screen
-                insertInitialData()
+           //     insertInitialData()
                 withContext(Dispatchers.Main) {
                     findNavController().navigate(R.id.action_splashFragment_to_loginFragment)
                 }
@@ -51,12 +54,5 @@ class SplashFragment : Fragment() {
         }
     }
 
-    private fun insertInitialData() {
-        lifecycleScope.launch(Dispatchers.IO) {
-            for (i in 0..38) {
-                val user = User(name = "$i", number = i, isBoolean = false, position = "$i")
-                userDao.insertUser(user)
-            }
-        }
-    }
+
 }

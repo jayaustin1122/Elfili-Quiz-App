@@ -7,6 +7,5 @@ import androidx.room.PrimaryKey
 data class UserPoints(
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0,
-    val userId: Int, // Foreign key to link with user table
     val points: Int
 )

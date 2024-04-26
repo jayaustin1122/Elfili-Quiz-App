@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.elfiliquizapp.database.ElfiliDatabase
+import com.example.elfiliquizapp.database.KabanataDao
 import com.example.elfiliquizapp.database.UserDao
 import com.example.elfiliquizapp.databinding.FragmentDetailBinding
 import com.example.elfiliquizapp.table.QuizQuestion
@@ -21,6 +22,7 @@ class DetailFragment : Fragment() {
     private val binding get() = _binding!!
     var mMediaPlayer: MediaPlayer? = null
     private lateinit var userDao: UserDao
+    private lateinit var kabanataDao: KabanataDao
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -36,7 +38,7 @@ class DetailFragment : Fragment() {
         val position = arguments?.getString("position") ?: ""
         val audioResId = arguments?.getInt("audio") ?: 0
         // Set data to views
-        getUserFromDatabase(position)
+        getKabanataFromPosition(position.toInt())
         binding.imageView.setImageResource(imageResId)
         binding.textTitle.text = title
         binding.textContent.text = content
@@ -74,9 +76,9 @@ class DetailFragment : Fragment() {
 
         return view
     }
-    private fun getUserFromDatabase(position: String) {
+    private fun getKabanataFromPosition(position: Int) {
         lifecycleScope.launch(Dispatchers.IO) {
-            val user = userDao.getKabanata(position)
+            val user = kabanataDao.getKabanata(position)
             withContext(Dispatchers.Main) {
                 if (user != null) {
                     binding.btnQuiz.isEnabled = user.isBoolean == true

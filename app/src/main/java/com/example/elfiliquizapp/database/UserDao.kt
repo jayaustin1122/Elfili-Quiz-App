@@ -10,8 +10,7 @@ interface UserDao {
     @Insert
     suspend fun insertUser(user: User)
 
-    @Query("SELECT * FROM User ")
+    @Query("SELECT * FROM User LIMIT 1 ")
     suspend fun getSingleUser(): User?
-    @Query("SELECT * FROM User WHERE position = :position")
-    suspend fun getKabanata(position: String): User?
+
 }
