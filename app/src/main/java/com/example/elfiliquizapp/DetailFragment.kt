@@ -1,9 +1,11 @@
 package com.example.elfiliquizapp
 import android.media.MediaPlayer
 import android.os.Bundle
+import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.SeekBar
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -30,6 +32,7 @@ class DetailFragment : Fragment() {
         _binding = FragmentDetailBinding.inflate(inflater, container, false)
         val view = binding.root
         userDao = ElfiliDatabase.invoke(requireContext()).getUserDao()
+        kabanataDao = ElfiliDatabase.invoke(requireContext()).getKabanata()
         // Retrieve data from arguments
         val imageResId = arguments?.getInt("imageResId") ?: R.drawable.ic_launcher_background
         val author = arguments?.getString("author") ?: ""
@@ -42,16 +45,8 @@ class DetailFragment : Fragment() {
         binding.imageView.setImageResource(imageResId)
         binding.textTitle.text = title
         binding.textContent.text = content
+        controlSound(audioResId)
 
-        binding.play.setOnClickListener {
-            playSound(audioResId)
-        }
-        binding.stop.setOnClickListener {
-            stopSound()
-        }
-        binding.pause.setOnClickListener {
-            pauseSound()
-        }
         binding.btnQuiz.setOnClickListener {
             val quizQuestions = arguments?.getSerializable("quizQuestions") as? List<QuizQuestion>
             if (quizQuestions != null) {
@@ -70,57 +65,92 @@ class DetailFragment : Fragment() {
             }
         }
         binding.back.setOnClickListener {
-            findNavController().navigate(R.id.action_detailFragment2_to_homeFragment)
+            if (mMediaPlayer !== null)
+                mMediaPlayer?.stop()
+            mMediaPlayer?.reset()
+            mMediaPlayer?.release()
+            mMediaPlayer = null
+            val quizFragment = HomeFragment()
+            requireActivity().supportFragmentManager.beginTransaction()
+                .replace(R.id.fragmentContainerView, quizFragment)
+                .addToBackStack(null)
+                .commit()
+
 
         }
 
         return view
     }
+
+    private fun controlSound(audioResId: Int) {
+        binding.play.setOnClickListener {
+            if (mMediaPlayer == null){
+                mMediaPlayer = MediaPlayer.create(requireContext(),audioResId)
+
+                initialSeekbar()
+            }
+            mMediaPlayer?.start()
+        }
+        binding.pause.setOnClickListener {
+            if (mMediaPlayer !== null) mMediaPlayer?.pause()
+        }
+        binding.stop.setOnClickListener {
+            if (mMediaPlayer !== null)
+                mMediaPlayer?.stop()
+                mMediaPlayer?.reset()
+                mMediaPlayer?.release()
+                mMediaPlayer = null
+        }
+        binding.sekkbar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener{
+            override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
+                if (fromUser) mMediaPlayer?.seekTo(progress)
+            }
+
+            override fun onStartTrackingTouch(p0: SeekBar?) {
+
+            }
+
+            override fun onStopTrackingTouch(p0: SeekBar?) {
+
+            }
+
+        })
+
+    }
+
+    private fun initialSeekbar() {
+        mMediaPlayer?.let {
+            binding.sekkbar.max = it.duration
+        }
+        val handler = Handler()
+        handler.postDelayed(object : Runnable{
+            override fun run() {
+                try {
+                    binding.sekkbar.progress = mMediaPlayer!!.currentPosition
+                    handler.postDelayed(this,1000)
+
+                }catch (e:Exception){
+                    binding.sekkbar.progress = 0
+                }
+
+
+            }
+
+        },0)
+    }
+
     private fun getKabanataFromPosition(position: Int) {
         lifecycleScope.launch(Dispatchers.IO) {
             val user = kabanataDao.getKabanata(position)
             withContext(Dispatchers.Main) {
                 if (user != null) {
-                    binding.btnQuiz.isEnabled = user.isBoolean == true
+                    binding.btnQuiz.isEnabled = user.isBoolean == false
                 }
 
             }
         }
     }
-    private fun playSound(audioResId: Int) {
-        // Release any existing MediaPlayer instance
-        stopSound()
-        mMediaPlayer = MediaPlayer.create(requireContext(), audioResId)
-        mMediaPlayer?.isLooping = true
-        mMediaPlayer?.start()
-    }
 
-    // 2. Pause playback
-    fun pauseSound() {
-        if (mMediaPlayer?.isPlaying == true) mMediaPlayer?.pause()
-    }
 
-    // 3. Stops playback
-    fun stopSound() {
-        if (mMediaPlayer != null) {
-            mMediaPlayer!!.stop()
-            mMediaPlayer!!.release()
-            mMediaPlayer = null
-        }
-    }
-
-    // 4. Destroys the MediaPlayer instance when the app is closed
-    override fun onStop() {
-        super.onStop()
-        if (mMediaPlayer != null) {
-            mMediaPlayer!!.release()
-            mMediaPlayer = null
-        }
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
 
 }
