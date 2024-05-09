@@ -1,4 +1,4 @@
-package com.example.elfiliquizapp
+package com.example.elfiliquizapp.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.elfiliquizapp.R
 import com.example.elfiliquizapp.model.Datas
 
 class Myadapter2(private val context: Context) :

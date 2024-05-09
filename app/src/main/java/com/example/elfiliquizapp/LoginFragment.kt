@@ -46,7 +46,7 @@ class LoginFragment : Fragment() {
                         // This code block will execute on the main thread
                         Log.d("LoginFragment", "User inserted successfully: $username")
                         // Navigate to the home fragment
-                        findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
+                        findNavController().navigate(R.id.action_loginFragment_to_navFragment)
                     }
                 }
             }

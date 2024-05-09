@@ -20,7 +20,6 @@ import kotlinx.coroutines.withContext
 class SplashFragment : Fragment() {
 
     private lateinit var userDao: UserDao
-    private lateinit var kabanataDao: KabanataDao
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -42,13 +41,17 @@ class SplashFragment : Fragment() {
             if (users != null) {
                 // Users are registered, navigate to home screen
                 withContext(Dispatchers.Main) {
-                    findNavController().navigate(R.id.action_splashFragment_to_homeFragment)
+                    findNavController().navigate(R.id.action_splashFragment_to_navFragment)
+
+
+
                 }
             } else {
                 // No users registered, insert initial data and navigate to login screen
            //     insertInitialData()
                 withContext(Dispatchers.Main) {
                     findNavController().navigate(R.id.action_splashFragment_to_loginFragment)
+
                 }
             }
         }

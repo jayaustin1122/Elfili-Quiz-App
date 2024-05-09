@@ -9,7 +9,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.addCallback
 import androidx.core.content.edit
@@ -17,6 +16,8 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.elfiliquizapp.adapter.Myadapter2
 import com.example.elfiliquizapp.database.ElfiliDatabase
 import com.example.elfiliquizapp.database.KabanataDao
 import com.example.elfiliquizapp.database.UserDao
@@ -24,12 +25,10 @@ import com.example.elfiliquizapp.databinding.FragmentHomeBinding
 import com.example.elfiliquizapp.model.Datas
 import com.example.elfiliquizapp.model.Kabanata
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import java.io.Serializable
 
-class HomeFragment : Fragment(),Myadapter2.OnItemClickListener2  {
+class HomeFragment : Fragment(), Myadapter2.OnItemClickListener2  {
     private lateinit var _binding: FragmentHomeBinding
     private lateinit var userDao: UserDao
     private val homeViewModel2: HomeViewModel2 by viewModels()
@@ -55,7 +54,7 @@ class HomeFragment : Fragment(),Myadapter2.OnItemClickListener2  {
             Context.MODE_PRIVATE
         )
 
-        displayUser()
+
         // Initialize RecyclerView adapter
         adapter2 = Myadapter2(requireContext())
         adapter2.setOnItemClickListener(this)
@@ -65,23 +64,14 @@ class HomeFragment : Fragment(),Myadapter2.OnItemClickListener2  {
         // Set RecyclerView adapter
         _binding.cropRecycler1.adapter = adapter2
         // Set GridLayoutManager with 2 spans
-        _binding.cropRecycler1.layoutManager = GridLayoutManager(requireContext(), 2)
+        _binding.cropRecycler1.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false);
 
         // Observe dataList from ViewModel
         homeViewModel2.dataList.observe(viewLifecycleOwner, Observer {
             adapter2.setDataList(it)
         })
 
-        // Query the user's name
-        GlobalScope.launch(Dispatchers.IO) {
-            val currentUser = userDao.getSingleUser()
-            currentUser?.let {
-                // Switch to the main thread to update UI
-                withContext(Dispatchers.Main) {
-                    _binding.name.text = currentUser.name
-                }
-            }
-        }
+
         if (!sharedPreferences.getBoolean("INITIAL_DATA_INSERTED", false)) {
             insertInitialData()
             sharedPreferences.edit {
@@ -119,14 +109,5 @@ class HomeFragment : Fragment(),Myadapter2.OnItemClickListener2  {
             .addToBackStack(null)
             .commit()
     }
-    private fun displayUser() {
-        lifecycleScope.launch(Dispatchers.IO) {
-            // Retrieve the user from the database by position
-            val user = userDao.getSingleUser()
-            if (user != null) {
-                _binding.name.text = user.name
-            }
 
-        }
-    }
 }

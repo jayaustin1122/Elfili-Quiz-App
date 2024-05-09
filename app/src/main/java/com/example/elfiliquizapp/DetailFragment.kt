@@ -1,4 +1,5 @@
 package com.example.elfiliquizapp
+import android.annotation.SuppressLint
 import android.media.MediaPlayer
 import android.os.Bundle
 import android.os.Handler
@@ -25,6 +26,8 @@ class DetailFragment : Fragment() {
     var mMediaPlayer: MediaPlayer? = null
     private lateinit var userDao: UserDao
     private lateinit var kabanataDao: KabanataDao
+
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -70,18 +73,13 @@ class DetailFragment : Fragment() {
             mMediaPlayer?.reset()
             mMediaPlayer?.release()
             mMediaPlayer = null
-            val quizFragment = HomeFragment()
-            requireActivity().supportFragmentManager.beginTransaction()
-                .replace(R.id.fragmentContainerView, quizFragment)
-                .addToBackStack(null)
-                .commit()
-
-
+            requireActivity().supportFragmentManager.popBackStack() // Navigate back to previous fragment
         }
 
         return view
     }
 
+    @SuppressLint("SuspiciousIndentation")
     private fun controlSound(audioResId: Int) {
         binding.play.setOnClickListener {
             if (mMediaPlayer == null){

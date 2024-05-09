@@ -24,6 +24,10 @@
     <color name="g_red">#FF0000</color>
     <color name="g_gray500">#969899</color>
     <color name="g_orange_yellow">#F8BA00</color>
-    <color name="g_green">#12DB6E</color>
+    <color name="g_green">#B3CC5C</color>
     <color name="g_blue2">#03A9F4</color>
+    <color name="lightblue">#DEEBF1</color>
+    <color name="textcolorBrown">#6C3E3B</color>
+    <color name="buttonbrown">#F6E7CC</color>
+    <color name="bg_home">#4C8F93</color>
 </resources>
