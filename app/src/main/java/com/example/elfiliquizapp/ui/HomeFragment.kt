@@ -6,10 +6,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.SearchView
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.elfiliquizapp.R
 import com.example.elfiliquizapp.adapter.Myadapter2
@@ -56,9 +58,20 @@ class HomeFragment : Fragment(), Myadapter2.OnItemClickListener2  {
         homeViewModel2.dataList.observe(viewLifecycleOwner, Observer {
             adapter2.setDataList(it)
         })
+        _binding.search.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                newText?.let { homeViewModel2.filterData(requireContext(), it) }
+                return true
+            }
+        })
+
     }
 
-    override fun onItemClick2(position: Int, data: Datas) {
+            override fun onItemClick2(position: Int, data: Datas) {
         // Navigate to new fragment and pass data
         val bundle = Bundle().apply {
             putInt("imageResId", data.imageResId)

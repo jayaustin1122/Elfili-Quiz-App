@@ -1,5 +1,6 @@
 package com.example.elfiliquizapp.viewmodels
 
+import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -7,11 +8,12 @@ import com.example.elfiliquizapp.R
 import com.example.elfiliquizapp.model.Datas
 import com.example.elfiliquizapp.table.QuizQuestion
 
+
 class HomeViewModel2 : ViewModel() {
 
     private val _dataList = MutableLiveData<List<Datas>>()
     val dataList: LiveData<List<Datas>> = _dataList
-
+    private val originalDataList: MutableList<Datas> = mutableListOf()
     init {
         // Initialize your dataList here
         val initialList = listOf(
@@ -1150,9 +1152,20 @@ class HomeViewModel2 : ViewModel() {
             ),
         // Add more Datas as needed
         )
+        originalDataList.addAll(initialList)
         _dataList.value = initialList
     }
     fun Datas.getAudioResId(): Int {
         return audioResId
+    }
+    fun filterData(context: Context, query: String) {
+        val filteredList = if (query.isEmpty()) {
+            originalDataList.toList()
+        } else {
+            originalDataList.filter { data ->
+                context.getString(data.titleResId).contains(query, true)
+            }
+        }
+        _dataList.value = filteredList
     }
 }
