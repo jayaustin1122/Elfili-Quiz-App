@@ -1,19 +1,18 @@
 package com.example.elfiliquizapp
 
-import HomeViewModel2
-import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.example.elfiliquizapp.database.ElfiliDatabase
-import com.example.elfiliquizapp.database.KabanataDao
 import com.example.elfiliquizapp.database.UserDao
 import com.example.elfiliquizapp.databinding.FragmentNavBinding
+import com.example.elfiliquizapp.ui.HomeFragment
+import com.example.elfiliquizapp.ui.ProfileFragment
+import com.example.elfiliquizapp.ui.SearchFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -39,6 +38,7 @@ class NavFragment : Fragment() {
         userDao = ElfiliDatabase.invoke(requireContext()).getUserDao()
         fragmentManager = requireActivity().supportFragmentManager
         displayUser()
+
         val homeAdminFragment = HomeFragment()
         val searchFragment = SearchFragment()
         val profileFragment = ProfileFragment()
@@ -61,9 +61,10 @@ class NavFragment : Fragment() {
                 else -> return@setOnNavigationItemSelectedListener false
             }
             fragmentManager.beginTransaction()
-                .replace(R.id.fragment_containerAdmin, selectedFragment)
-                .addToBackStack(null) // Add fragment to back stack
-                .commitAllowingStateLoss()// Use commitAllowingStateLoss() to retain fragment state
+                .replace(R.id.fragment_containerAdmin, selectedFragment, "NavFragment")
+                .addToBackStack("NavFragment")
+                .commitAllowingStateLoss()
+
             true
         }
 
@@ -72,7 +73,7 @@ class NavFragment : Fragment() {
             if (!homeAdminFragment.isAdded) {
                 fragmentManager.beginTransaction()
                     .add(R.id.fragment_containerAdmin, homeAdminFragment)
-                    .commit()
+                      .commit()
             }
             bottomNavigationView.selectedItemId = R.id.navigation_HomeAdmin
         }

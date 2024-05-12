@@ -1,4 +1,4 @@
-package com.example.elfiliquizapp
+package com.example.elfiliquizapp.viewmodels
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

@@ -1,20 +1,20 @@
-package com.example.elfiliquizapp
+package com.example.elfiliquizapp.ui
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.elfiliquizapp.databinding.FragmentProfileBinding
+import com.example.elfiliquizapp.databinding.FragmentSearchBinding
 
 
-class ProfileFragment : Fragment() {
-    private lateinit var binding : FragmentProfileBinding
+class SearchFragment : Fragment() {
+    private lateinit var binding : FragmentSearchBinding
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentProfileBinding.inflate(layoutInflater)
+        binding = FragmentSearchBinding.inflate(layoutInflater)
         // Inflate the layout for this fragment
         return binding.root
     }
@@ -23,5 +23,4 @@ class ProfileFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
     }
-
 }

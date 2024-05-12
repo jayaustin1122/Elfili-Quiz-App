@@ -1,4 +1,4 @@
-package com.example.elfiliquizapp
+package com.example.elfiliquizapp.ui
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

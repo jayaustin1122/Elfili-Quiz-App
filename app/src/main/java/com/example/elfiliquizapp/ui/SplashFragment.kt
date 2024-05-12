@@ -1,4 +1,4 @@
-package com.example.elfiliquizapp
+package com.example.elfiliquizapp.ui
 
 import android.os.Bundle
 import android.os.Handler
@@ -8,11 +8,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.example.elfiliquizapp.R
 import com.example.elfiliquizapp.database.ElfiliDatabase
-import com.example.elfiliquizapp.database.KabanataDao
 import com.example.elfiliquizapp.database.UserDao
-import com.example.elfiliquizapp.model.Kabanata
-import com.example.elfiliquizapp.table.User
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext

@@ -1,3 +1,5 @@
+package com.example.elfiliquizapp.viewmodels
+
 import androidx.lifecycle.ViewModel
 
 class DetailViewModel(

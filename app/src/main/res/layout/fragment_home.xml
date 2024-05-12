@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/transparent"
-    tools:context=".HomeFragment">
+    tools:context=".ui.HomeFragment">
 
 
     <TextView
@@ -30,6 +30,7 @@
         android:id="@+id/cropRecycler1"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:elevation="20dp"
         android:layout_margin="10dp"
         android:orientation="horizontal"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"

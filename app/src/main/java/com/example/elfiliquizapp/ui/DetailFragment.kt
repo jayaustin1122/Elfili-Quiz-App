@@ -1,4 +1,4 @@
-package com.example.elfiliquizapp
+package com.example.elfiliquizapp.ui
 import android.annotation.SuppressLint
 import android.media.MediaPlayer
 import android.os.Bundle
@@ -10,6 +10,7 @@ import android.widget.SeekBar
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.example.elfiliquizapp.R
 import com.example.elfiliquizapp.database.ElfiliDatabase
 import com.example.elfiliquizapp.database.KabanataDao
 import com.example.elfiliquizapp.database.UserDao
@@ -68,13 +69,17 @@ class DetailFragment : Fragment() {
             }
         }
         binding.back.setOnClickListener {
-            if (mMediaPlayer !== null)
+            if (mMediaPlayer != null) {
                 mMediaPlayer?.stop()
-            mMediaPlayer?.reset()
-            mMediaPlayer?.release()
-            mMediaPlayer = null
-            requireActivity().supportFragmentManager.popBackStack() // Navigate back to previous fragment
+                mMediaPlayer?.reset()
+                mMediaPlayer?.release()
+                mMediaPlayer = null
+            }
+
+            findNavController().navigateUp()
+
         }
+
 
         return view
     }

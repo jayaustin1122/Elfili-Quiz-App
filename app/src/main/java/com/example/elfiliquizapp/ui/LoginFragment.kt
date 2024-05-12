@@ -1,4 +1,4 @@
-package com.example.elfiliquizapp
+package com.example.elfiliquizapp.ui
 
 import android.os.Bundle
 import android.util.Log
@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.example.elfiliquizapp.R
 import com.example.elfiliquizapp.database.ElfiliDatabase
 import com.example.elfiliquizapp.database.UserDao
 import com.example.elfiliquizapp.databinding.FragmentLoginBinding
