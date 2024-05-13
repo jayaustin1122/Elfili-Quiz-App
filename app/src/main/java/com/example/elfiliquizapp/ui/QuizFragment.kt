@@ -8,11 +8,13 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.elfiliquizapp.R
 import com.example.elfiliquizapp.adapter.QuizAdapter
 import com.example.elfiliquizapp.database.ElfiliDatabase
+import com.example.elfiliquizapp.database.StatusDao
 import com.example.elfiliquizapp.databinding.FragmentQuizBinding
 import com.example.elfiliquizapp.table.QuizQuestion
 import com.example.elfiliquizapp.database.UserPointsDao
@@ -21,6 +23,7 @@ import com.example.elfiliquizapp.viewmodels.HomeViewModel2
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class QuizFragment : Fragment() {
     private lateinit var binding: FragmentQuizBinding
@@ -29,6 +32,7 @@ class QuizFragment : Fragment() {
     private lateinit var viewModel: HomeViewModel2
     // Database instance
     private lateinit var userPointsDao: UserPointsDao
+    private lateinit var statusDao: StatusDao
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,6 +45,7 @@ class QuizFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(requireActivity()).get(HomeViewModel2::class.java)
+        statusDao = ElfiliDatabase.invoke(requireContext()).getStatus()
 
         userPointsDao = ElfiliDatabase.invoke(requireContext()).getUserPointsDao()
 
@@ -48,12 +53,28 @@ class QuizFragment : Fragment() {
         val taken = arguments?.getBoolean("taken") ?: false
         val position = arguments?.getString("position")
         this.quizQuestions = quizQuestions
+        val newPosition = position+1
+        lifecycleScope.launch(Dispatchers.IO) {
+            val status = statusDao.getStatusById(newPosition.toLong())
+            status?.let { // Ensuring status is not null
+                if (!it.state) {
+
+                    withContext(Dispatchers.Main) {
+                        // Perform action if state is false
+                    }
+                } else {
+                    // State is true, show dialog
+                    withContext(Dispatchers.Main) {
+                        showAlreadyTakenDialog()
+                    }
+                }
+            }
+        }
 
         quizAdapter = QuizAdapter(quizQuestions ?: emptyList())
         if (taken == true) {
             showAlreadyTakenDialog()
         }
-        Toast.makeText(requireContext(), "$taken", Toast.LENGTH_SHORT).show()
         binding.quizRecyclerView.apply {
             adapter = quizAdapter
             layoutManager = LinearLayoutManager(requireContext())
@@ -64,23 +85,18 @@ class QuizFragment : Fragment() {
             val correctAnswers = evaluateAnswers()
             Toast.makeText(requireContext(), "You got $correctAnswers correct answers!", Toast.LENGTH_SHORT).show()
             updateUserPoints(correctAnswers)
+            lifecycleScope.launch(Dispatchers.IO) {
+                statusDao.updateStatusById(newPosition.toLong(),true)
 
-            // Update the taken status in the local data
-            val updatedDataList = viewModel.dataList.value.orEmpty()
-
-            // Ensure position is not null and convert it safely to Int
-            val quizPosition = position?.toInt() ?: -1
-            Toast.makeText(requireContext(), "$position == $quizPosition", Toast.LENGTH_SHORT).show() // Debug message
-
-            // Find the quiz item with the matching ID and update its taken status
-            updatedDataList.firstOrNull { it.id == quizPosition }?.let { quiz ->
-                quiz.taken = true
-                viewModel._dataList.value = updatedDataList
             }
-            viewModel.updateQuizTakenStatus(quizPosition)
-
             findNavController().navigateUp()
         }
+        binding.back.setOnClickListener {
+
+            findNavController().navigateUp()
+
+        }
+
 
 
     }

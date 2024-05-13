@@ -6,18 +6,20 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.example.elfiliquizapp.model.Datas
 import com.example.elfiliquizapp.model.Kabanata
+import com.example.elfiliquizapp.table.Status
 import com.example.elfiliquizapp.table.User
 import com.example.elfiliquizapp.table.UserPoints
 
 @Database(
-    entities = [User::class, Kabanata::class, UserPoints::class],
-    version = 2
+    entities = [User::class, Kabanata::class, UserPoints::class, Status::class],
+    version = 3
 )
 abstract class ElfiliDatabase : RoomDatabase() {
 
     abstract fun getUserDao(): UserDao
     abstract fun getKabanata(): KabanataDao
     abstract fun getUserPointsDao(): UserPointsDao
+    abstract fun getStatus(): StatusDao
 
     companion object {
         @Volatile
