@@ -43,7 +43,7 @@ class DetailFragment : Fragment() {
         val author = arguments?.getString("author") ?: ""
         val title = arguments?.getString("title") ?: ""
         val content = arguments?.getString("content") ?: ""
-        val position = arguments?.getString("position") ?: ""
+        val position = arguments?.getString("id") ?: ""
         val audioResId = arguments?.getInt("audio") ?: 0
         val taken = arguments?.getBoolean("taken") ?: false
         // Set data to views
@@ -59,7 +59,7 @@ class DetailFragment : Fragment() {
                 val bundle = Bundle().apply {
                     arguments?.getString("position") ?: ""
                     putSerializable("quizQuestions", quizQuestions as Serializable)
-                    putString("position",position)
+                    putString("id",position)
                     putBoolean("taken", taken)
                 }
                 val quizFragment = QuizFragment()

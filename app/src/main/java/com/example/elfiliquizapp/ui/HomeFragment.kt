@@ -80,7 +80,7 @@ class HomeFragment : Fragment(), Myadapter2.OnItemClickListener2  {
         val bundle = Bundle().apply {
             putInt("imageResId", data.imageResId)
             putString("title", getString(data.titleResId))
-            putString("position", position.toString())
+            putString("id", data.id.toString())
             putString("content", getString(data.contentResId))
             putInt("audio", data.audioResId)
             putBoolean("taken", data.taken)

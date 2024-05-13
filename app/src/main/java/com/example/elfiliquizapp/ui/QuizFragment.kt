@@ -51,7 +51,7 @@ class QuizFragment : Fragment() {
 
         val quizQuestions = arguments?.getSerializable("quizQuestions") as? List<QuizQuestion>
         val taken = arguments?.getBoolean("taken") ?: false
-        val position = arguments?.getString("position")
+        val position = arguments?.getString("id")
         this.quizQuestions = quizQuestions
         val newPosition = position+1
         lifecycleScope.launch(Dispatchers.IO) {
