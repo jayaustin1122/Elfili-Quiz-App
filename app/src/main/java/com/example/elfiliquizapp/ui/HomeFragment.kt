@@ -21,12 +21,16 @@ import com.example.elfiliquizapp.database.UserDao
 import com.example.elfiliquizapp.databinding.FragmentHomeBinding
 import com.example.elfiliquizapp.model.Datas
 import java.io.Serializable
+interface BackPressedListener {
+    fun onBackPressed(): Boolean
+}
 
 class HomeFragment : Fragment(), Myadapter2.OnItemClickListener2  {
     private lateinit var _binding: FragmentHomeBinding
     private lateinit var userDao: UserDao
     private val homeViewModel2: HomeViewModel2 by viewModels()
     private lateinit var adapter2: Myadapter2
+    private var backPressedListener: BackPressedListener? = null
     private lateinit var kabanataDao: KabanataDao
 
     override fun onCreateView(
@@ -77,9 +81,9 @@ class HomeFragment : Fragment(), Myadapter2.OnItemClickListener2  {
             putInt("imageResId", data.imageResId)
             putString("title", getString(data.titleResId))
             putString("position", position.toString())
-            Toast.makeText(requireContext(),"$position",Toast.LENGTH_SHORT).show()
             putString("content", getString(data.contentResId))
             putInt("audio", data.audioResId)
+            putBoolean("taken", data.taken)
             putSerializable("quizQuestions", data.quizQuestions as Serializable) // Pass quiz questions
         }
         val detailFragment = DetailFragment()
@@ -87,5 +91,15 @@ class HomeFragment : Fragment(), Myadapter2.OnItemClickListener2  {
         findNavController().navigate(R.id.action_navFragment_to_detailFragment, bundle)
 
     }
+    override fun onResume() {
+        super.onResume()
+        // Communicate with the hosting activity to handle back press
+        backPressedListener = requireActivity() as? BackPressedListener
+    }
 
+    override fun onPause() {
+        super.onPause()
+        // Release the reference to avoid potential memory leaks
+        backPressedListener = null
+    }
 }

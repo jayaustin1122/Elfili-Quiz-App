@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SeekBar
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -44,6 +45,7 @@ class DetailFragment : Fragment() {
         val content = arguments?.getString("content") ?: ""
         val position = arguments?.getString("position") ?: ""
         val audioResId = arguments?.getInt("audio") ?: 0
+        val taken = arguments?.getBoolean("taken") ?: false
         // Set data to views
         getKabanataFromPosition(position.toInt())
         binding.imageView.setImageResource(imageResId)
@@ -57,6 +59,8 @@ class DetailFragment : Fragment() {
                 val bundle = Bundle().apply {
                     arguments?.getString("position") ?: ""
                     putSerializable("quizQuestions", quizQuestions as Serializable)
+                    putString("position",position)
+                    putBoolean("taken", taken)
                 }
                 val quizFragment = QuizFragment()
                 quizFragment.arguments = bundle

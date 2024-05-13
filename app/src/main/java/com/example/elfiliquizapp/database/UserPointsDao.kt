@@ -12,9 +12,10 @@ interface UserPointsDao {
     @Insert
     suspend fun insertUserPoints(userPoints: UserPoints)
 
-    @Query("SELECT points FROM user_points ")
+    @Query("SELECT * FROM user_points LIMIT 1")
     suspend fun getUserPoints(): UserPoints?
 
     @Update
-    suspend fun updateUserPoints(userId: Int, newPoints: Int)
+    suspend fun updateUserPoints(userPoints: UserPoints)
 }
+

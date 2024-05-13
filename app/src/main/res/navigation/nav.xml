@@ -38,7 +38,14 @@
         android:id="@+id/quizFragment"
         tools:layout="@layout/fragment_quiz"
         android:name="com.example.elfiliquizapp.ui.QuizFragment"
-        android:label="QuizFragment" />
+        android:label="QuizFragment" >
+        <action
+            android:id="@+id/action_quizFragment_to_navFragment"
+            app:destination="@id/navFragment" />
+        <action
+            android:id="@+id/action_quizFragment_to_detailFragment"
+            app:destination="@id/detailFragment" />
+    </fragment>
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.example.elfiliquizapp.ui.HomeFragment"

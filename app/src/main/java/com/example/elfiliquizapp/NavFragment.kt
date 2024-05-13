@@ -9,6 +9,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.lifecycleScope
 import com.example.elfiliquizapp.database.ElfiliDatabase
 import com.example.elfiliquizapp.database.UserDao
+import com.example.elfiliquizapp.database.UserPointsDao
 import com.example.elfiliquizapp.databinding.FragmentNavBinding
 import com.example.elfiliquizapp.ui.HomeFragment
 import com.example.elfiliquizapp.ui.ProfileFragment
@@ -24,6 +25,7 @@ class NavFragment : Fragment() {
     private lateinit var binding : FragmentNavBinding
     private lateinit var userDao: UserDao
     private lateinit var fragmentManager: FragmentManager
+    private lateinit var userPointsDao: UserPointsDao
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -36,6 +38,7 @@ class NavFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         userDao = ElfiliDatabase.invoke(requireContext()).getUserDao()
+        userPointsDao = ElfiliDatabase.invoke(requireContext()).getUserPointsDao()
         fragmentManager = requireActivity().supportFragmentManager
         displayUser()
 
@@ -67,6 +70,23 @@ class NavFragment : Fragment() {
 
             true
         }
+        // Inside your Fragment or wherever you need to retrieve the points
+// Assuming you have access to userPointsDao
+
+        GlobalScope.launch(Dispatchers.Main) {
+            val userPoints = userPointsDao.getUserPoints()
+            if (userPoints != null) {
+                // User points retrieved successfully
+                val points = userPoints.points
+                // Now you can use the points as needed
+                // For example, update a TextView to display the points
+                binding.points.text = "Points: $points"
+            } else {
+                // User points not found
+                // Handle this case if needed
+            }
+        }
+
 
         if (savedInstanceState == null) {
             // Initially load the HomeFragment only if it's not already added
