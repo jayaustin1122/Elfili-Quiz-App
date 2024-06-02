@@ -28,6 +28,8 @@ class DetailFragment : Fragment() {
     var mMediaPlayer: MediaPlayer? = null
     private lateinit var userDao: UserDao
     private lateinit var kabanataDao: KabanataDao
+    private var scrollAmount = 0
+    private val scrollSpeed = 10
 
 
     override fun onCreateView(

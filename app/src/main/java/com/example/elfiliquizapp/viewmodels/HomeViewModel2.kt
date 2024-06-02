@@ -290,12 +290,12 @@ class HomeViewModel2 : ViewModel(){
         R.raw.kabanata_10, quizQuestions = listOf(
                     QuizQuestion(
                         question = "Mga Katnungan. Piliin ang tamang sagot sa bawat bilang.\n" +
-                                "// A. limampu\n" +
-                                "// B. Birhen ng Antipolo\n" +
-                                "// C. Padre Clemente\n" +
-                                "// D. Apatnapu\n" +
-                                "// E. sagpang\n" +
-                                "// F. laket\n\nAng nayong nakapagitan sa Tiani at San Diego.",
+                                "A. limampu\n" +
+                                "B. Birhen ng Antipolo\n" +
+                                "C. Padre Clemente\n" +
+                                "D. Apatnapu\n" +
+                                "E. sagpang\n" +
+                                "F. laket\n\nAng nayong nakapagitan sa Tiani at San Diego.",
                         options = listOf("limampu", "Birhen ng Antipolo", "Padre Clemente", "Apatnapu", "sagpang", "laket"),
                         correctAnswer = 4 //
                     ),
@@ -512,13 +512,13 @@ class HomeViewModel2 : ViewModel(){
         R.raw.kabanata_17, quizQuestions = listOf(
                     QuizQuestion(
                         question = " Mga Katanungan. Hanapin ang titik ng tamang sagot sa bawat bilang.\n" +
-                                "// A. Antipolo\n" +
-                                "// B. Juanito\n" +
-                                "// C. Padre Camorra\n" +
-                                "// D. Enero\n" +
-                                "// E. Payat na Prayle\n" +
-                                "// F. Pilipinas\n" +
-                                "// G. Disyembre\n\nAng buwan nang idaos ang perya sa Quiapo.",
+                                " A. Antipolo\n" +
+                                " B. Juanito\n" +
+                                " C. Padre Camorra\n" +
+                                " D. Enero\n" +
+                                " E. Payat na Prayle\n" +
+                                " F. Pilipinas\n" +
+                                " G. Disyembre\n\nAng buwan nang idaos ang perya sa Quiapo.",
                         options = listOf("A. Antipolo", "B. Juanito", "C. Padre Camorra", "D. Enero", "E. Payat na Prayle", "F. Pilipinas", "G. Disyembre"),
                         correctAnswer = 6 //
                     ),
@@ -736,53 +736,48 @@ class HomeViewModel2 : ViewModel(){
 
                 ),
                 false),
-        //    Datas(23,R.drawable.c, R.string.kabanata_24, R.string.,R.raw.kabanata_24),
-        //R.raw.kabanata_24, quizQuestions = listOf(
-//       QuizQuestion(
-//            question = ("Mga Katanungan. Piliin ang letra ng tamang sagot sa bawat pangungusap.
-//// A. Kapitan Heneral
-//// B. Paulita
-//// C. Doña Victorina
-//// D. Matandang babae
-//// E. Isagani\n\nKung ang mga liberal sa España ay katulad ng mga narito, mabibilang sa daliri ang magiging tapat sa kanya.”',
-//            options = listOf("A. Kapitan Heneral", "B. Paulita", "C. Doña Victorina", "D. Matandang babae", "E. Isagani"),
-//            correctAnswer = 0 //
-//        ),
-//        QuizQuestion(
-//            question = '"Kung wala kayong mapala?"',
-//            options = listOf("A. Kapitan Heneral", "B. Paulita", "C. Doña Victorina", "D. Matandang babae", "E. Isagani"),
-//
-//            correctAnswer = 1 //
-//        ),
-//        QuizQuestion(
-//            question = '"Kung mananatili sa pag-aaral at patuloy na magiging marangal, tiyak ang tagumpay ng bayan."',
-//            options = listOf("A. Kapitan Heneral", "B. Paulita", "C. Doña Victorina", "D. Matandang babae", "E. Isagani"),
-//
-//            correctAnswer = 4 //
-//        ),
-//        QuizQuestion(
-//            question = '"Pangarap, may pangarap! Marami kayong kaaway, ang bayang ito ay mananatiling busabos."',
-//            options = listOf("A. Kapitan Heneral", "B. Paulita", "C. Doña Victorina", "D. Matandang babae", "E. Isagani"),
-//
-//            correctAnswer = 2 //
-//        ),
-//        QuizQuestion(
-//            question = '"... namatay ang pag-ibig ko sa pagtatanggol sa karapatan ng aking bayan."',
-//            options = listOf("A. Kapitan Heneral", "B. Paulita", "C. Doña Victorina", "D. Matandang babae", "E. Isagani"),
-//
-//            correctAnswer = 3 //
-//        )
-//        ),
-//                        false),
+            Datas(23,R.drawable.chapter_37, R.string.kabanata_24, R.string.kabanata_24_content,
+        R.raw.kabanata_24, quizQuestions = listOf(
+       QuizQuestion(
+            question = ("Mga Katanungan. Piliin ang letra ng tamang sagot sa bawat pangungusap."),
+            options = listOf("A. Kapitan Heneral", "B. Paulita", "C. Doña Victorina", "D. Matandang babae", "E. Isagani"),
+            correctAnswer = 0 //
+        ),
+        QuizQuestion(
+            question = "Kung wala kayong mapala?",
+            options = listOf("A. Kapitan Heneral", "B. Paulita", "C. Doña Victorina", "D. Matandang babae", "E. Isagani"),
+
+            correctAnswer = 1 //
+        ),
+        QuizQuestion(
+            question = "Kung mananatili sa pag-aaral at patuloy na magiging marangal, tiyak ang tagumpay ng bayan.",
+            options = listOf("A. Kapitan Heneral", "B. Paulita", "C. Doña Victorina", "D. Matandang babae", "E. Isagani"),
+
+            correctAnswer = 4 //
+        ),
+        QuizQuestion(
+            question = "Pangarap, may pangarap! Marami kayong kaaway, ang bayang ito ay mananatiling busabos.",
+            options = listOf("A. Kapitan Heneral", "B. Paulita", "C. Doña Victorina", "D. Matandang babae", "E. Isagani"),
+
+            correctAnswer = 2 //
+        ),
+        QuizQuestion(
+            question = "... namatay ang pag-ibig ko sa pagtatanggol sa karapatan ng aking bayan.",
+            options = listOf("A. Kapitan Heneral", "B. Paulita", "C. Doña Victorina", "D. Matandang babae", "E. Isagani"),
+
+            correctAnswer = 3 //
+        )
+        ),
+                        false),
             Datas(24,R.drawable.chapter_25,R.string.kabanata_25, R.string.kabanata_25_content,
         R.raw.kabanata_25, quizQuestions = listOf(
                     QuizQuestion(
                         question = "Mga Katanungan. Piliin ang letra ng tamang sagot sa bawat pangungusap.\n" +
-                                "// A. Don Custodio\n" +
-                                "// B. Pinagtitipunan ng mga mag-aaral\n" +
-                                "// C. Pamahalaan at sa bayan\n" +
-                                "// D. Padre Irene\n" +
-                                "// E. Sa mga prayle\n\npansit gisado.",
+                                "A. Don Custodio\n" +
+                                "B. Pinagtitipunan ng mga mag-aaral\n" +
+                                "C. Pamahalaan at sa bayan\n" +
+                                "D. Padre Irene\n" +
+                                "E. Sa mga prayle\n\npansit gisado.",
                         options = listOf("A. Don Custodio", "B. Pinagtitipunan ng mga mag-aaral", "C. Pamahalaan at sa bayan", "D. Padre Irene", "E. Sa mga prayle"),
                         correctAnswer = 2 //
                     ),
@@ -908,11 +903,11 @@ class HomeViewModel2 : ViewModel(){
         R.raw.kabanata_29, quizQuestions = listOf(
                     QuizQuestion(
                         question = "Mga Katanungan. Piliin ang letra ng tamang sagot sa bawat pangungusap.\n" +
-                                "// A. 20.00\n" +
-                                "// B. 25.00\n" +
-                                "// C. Padre Irene\n" +
-                                "// D. Kapitan Tinong\n" +
-                                "// E. Don Patrocinio\n\nAng hinirang na eksekyutor o tagapamahala at tagapagtupad ng testamento ng kapitan ay si _______",
+                                "A. 20.00\n" +
+                                "B. 25.00\n" +
+                                "C. Padre Irene\n" +
+                                "D. Kapitan Tinong\n" +
+                                "E. Don Patrocinio\n\nAng hinirang na eksekyutor o tagapamahala at tagapagtupad ng testamento ng kapitan ay si _______",
                         options = listOf("A. 20.00", "B. 25.00", "C. Padre Irene", "D. Kapitan Tinong", "E. Don Patrocinio"),
                         correctAnswer = 2 //
                     ),
@@ -973,44 +968,44 @@ class HomeViewModel2 : ViewModel(){
 
                 ),
                 false),
-          //  Datas(30,R.drawable.chapter_31, R.string.kabanata_31, R.string.kabanata_31_content,
-        //R.raw.kabanata_31, quizQuestions = listOf(
-//        QuizQuestion(
-////            question = "Piliin ang letra ng wastong sagot. \n\n1. Ang nalipat sa bayan ng Tiani dahil sa nangyari kay Huli ",
-////            options = listOf("Padre Irene", "Padre Fernandez", "Padre Camorra", "Padre Salvi"),
-////            correctAnswer = 2 //
-////        ),
-////        QuizQuestion(
-////            question = "2. Ang estudyante na hindi pa nakalaya ",
-////            options = listOf("Sandoval", "Basilio", "Isagani", "Tadeo"),
-////            correctAnswer = 1 //
-////        ),
-////        QuizQuestion(
-////            question = "3. Ang nakatalo ng mataas na kawani sa panunungkulan ",
-////            options = listOf("Simoun", "Don Custodio", "Ben Zayb", "Kapitan Heneral"),
-////            correctAnswer = 3 //
-////        ),
-////        QuizQuestion(
-////            question = "4. Ang nagbitiw sa tungkulin at pagkaraa'y tumulak na pabalik sa España optungen",
-////            options = listOf("Mataas na Kawani", "Kapitan Heneral", "Ben Zayb", "Don Custodio"),
-////            correctAnswer = 1 //
-////        ),
-////        QuizQuestion(
-////            question = "5. Ang kilabot at pinuno ng mga tulisan ",
-////            options = listOf("Simoun", "Basilio", "Isagani", "Matanglawin"),
-////            correctAnswer = 3 //
-////        )
-//        ),
-//                        false),
+            Datas(30,R.drawable.chapter_31, R.string.kabanata_31, R.string.kabanata_31_content,
+        R.raw.kabanata_31, quizQuestions = listOf(
+        QuizQuestion(
+            question = "Piliin ang letra ng wastong sagot. \n\n1. Ang nalipat sa bayan ng Tiani dahil sa nangyari kay Huli ",
+            options = listOf("Padre Irene", "Padre Fernandez", "Padre Camorra", "Padre Salvi"),
+            correctAnswer = 2 //
+        ),
+        QuizQuestion(
+            question = "2. Ang estudyante na hindi pa nakalaya ",
+            options = listOf("Sandoval", "Basilio", "Isagani", "Tadeo"),
+            correctAnswer = 1 //
+        ),
+        QuizQuestion(
+            question = "3. Ang nakatalo ng mataas na kawani sa panunungkulan ",
+            options = listOf("Simoun", "Don Custodio", "Ben Zayb", "Kapitan Heneral"),
+            correctAnswer = 3 //
+        ),
+        QuizQuestion(
+            question = "4. Ang nagbitiw sa tungkulin at pagkaraa'y tumulak na pabalik sa España optungen",
+            options = listOf("Mataas na Kawani", "Kapitan Heneral", "Ben Zayb", "Don Custodio"),
+            correctAnswer = 1 //
+        ),
+        QuizQuestion(
+           question = "5. Ang kilabot at pinuno ng mga tulisan ",
+            options = listOf("Simoun", "Basilio", "Isagani", "Matanglawin"),
+            correctAnswer = 3 //
+        )
+        ),
+                        false),
             Datas(31,R.drawable.chapter_32, R.string.kabanata_32, R.string.kabanata_32_content,
         R.raw.kabanata_32, quizQuestions = listOf(
                     QuizQuestion(
                         question = "Piliin ang letra ng wastong sagot.\n" +
-                                "// A. Macaraig\n" +
-                                "// B. Tadeo\n" +
-                                "// C. Juanito\n" +
-                                "// D. Sandoval\n" +
-                                "// E. Isagani\n\nNatuwa ang mag-aaral na si _______,  sinigaan ang kanyang mga aklat at nauwi rin siya sa mahabang pagbabakasyon.",
+                                " A. Macaraig\n" +
+                                " B. Tadeo\n" +
+                                " C. Juanito\n" +
+                                " D. Sandoval\n" +
+                                " E. Isagani\n\nNatuwa ang mag-aaral na si _______,  sinigaan ang kanyang mga aklat at nauwi rin siya sa mahabang pagbabakasyon.",
                         options = listOf("A. Macaraig", "B. Tadeo", "C. Juanito", "D. Sandoval", "E. Isagani"),
                         correctAnswer = 1 //
                     ),
@@ -1071,11 +1066,11 @@ class HomeViewModel2 : ViewModel(){
         R.raw.kabanata_34, quizQuestions = listOf(
                     QuizQuestion(
                         question = " Piliin ang letra ng wastong sagot.\n" +
-                                "// A. Nanumbalik ang matinding galit at pagnanais na dumating na ang oras na kanyang hinihintay\n" +
-                                "// B. May asawa na siya at isang doktor na pinagmulan ng kaguluhan\n" +
-                                "// C. Isasakatuparan ang balak na paghihiganti\n" +
-                                "// D. Nagunita niya siya, gutom na naglalakad, noong bata pa hanggang magpaalila nga siya\n" +
-                                "// E. isang napakagarang lampara\n\nNagmuni-muni si Basilio habang naglalakad",
+                                " A. Nanumbalik ang matinding galit at pagnanais na dumating na ang oras na kanyang hinihintay\n" +
+                                " B. May asawa na siya at isang doktor na pinagmulan ng kaguluhan\n" +
+                                " C. Isasakatuparan ang balak na paghihiganti\n" +
+                                " D. Nagunita niya siya, gutom na naglalakad, noong bata pa hanggang magpaalila nga siya\n" +
+                                " E. isang napakagarang lampara\n\nNagmuni-muni si Basilio habang naglalakad",
                         options = listOf("A. Nanumbalik ang matinding galit at pagnanais na dumating na ang oras na kanyang hinihintay", "B. May asawa na siya at isang doktor na pinagmulan ng kaguluhan", "C. Isasakatuparan ang balak na paghihiganti", "D. Nagunita niya siya, gutom na naglalakad, noong bata pa hanggang magpaalila nga siya", "E. isang napakagarang lampara"),
                         correctAnswer = 3 //
                     ),
@@ -1132,36 +1127,36 @@ class HomeViewModel2 : ViewModel(){
 
                 ),
                 false),
-//            Datas(35,R.drawable.chapter_36, R.string.kabanata_36, R.string.kabanata_36_content,
-//        R.raw.kabanata_36, quizQuestions = listOf(
-//                    QuizQuestion(
-//                        question = "Mga Ktanungan. Isaayos ang mga letra sa loob ng kahon na nagpapakilala sa mga tauhan sa kabanata na angkop sa paglalarawang nasa ilalim nito. \n\nAng paring nagtago sa ilalim ng mesa ",
-//                        options = listOf("E R E P DE N A R I "),
-//                        correctAnswer = "PADRE IRENE" //
-//                    ),
-//                    QuizQuestion(
-//                        question = "Hindi siya nagbigay ng pahintulot na ilathala ang nangyari sa kasalan",
-//                        options = listOf("A H E LE N R"),
-//                        correctAnswer = "HENERAL" //
-//                    ),
-//                    QuizQuestion(
-//                        question = "Ang niloobang pari sa bahay- bakasyunan sa Pasig",
-//                        options = listOf("A P E R C D M A O R"),
-//                        correctAnswer = "PADRE CAMORA" //
-//                    ),
-//                    QuizQuestion(
-//                        question = "Manunulat na nagbalak sumulat ng balita ukol sa pangyayaring",
-//                        options = listOf("Z B Y E A B N"),
-//                        correctAnswer = "BEN ZAYB" //
-//                    ),
-//                    QuizQuestion(
-//                        question = "Ang bumuo ng panukala at naghanda ng habla laban sa mag- aalahas",
-//                        options = listOf("D I N S O C O T U O D"),
-//                        correctAnswer = "DON CUSTODIO" //
-//                    )
-//
-//                ),
-//                false),
+            Datas(35,R.drawable.chapter_36, R.string.kabanata_36, R.string.kabanata_36_content,
+        R.raw.kabanata_36, quizQuestions = listOf(
+                    QuizQuestion(
+                        question = "Mga Katanungan. Isaayos ang mga letra sa loob ng kahon na nagpapakilala sa mga tauhan sa kabanata na angkop sa paglalarawang nasa ilalim nito. \n\nAng paring nagtago sa ilalim ng mesa",
+                        options = listOf("E R E P DE N A R I", "PADRE IRENE", "PADRE SALVI", "PADRE CAMORA"),
+                        correctAnswer = 1 // PADRE IRENE
+                    ),
+                    QuizQuestion(
+                        question = "Hindi siya nagbigay ng pahintulot na ilathala ang nangyari sa kasalan",
+                        options = listOf("A H E LE N R", "HENERAL", "KAPITAN TIYAGO", "SIMOUN"),
+                        correctAnswer = 1 // HENERAL
+                    ),
+                    QuizQuestion(
+                        question = "Ang niloobang pari sa bahay-bakasyunan sa Pasig",
+                        options = listOf("A P E R C D M A O R", "PADRE CAMORA", "PADRE SALVI", "PADRE IRENE"),
+                        correctAnswer = 1 // PADRE CAMORA
+                    ),
+                    QuizQuestion(
+                        question = "Manunulat na nagbalak sumulat ng balita ukol sa pangyayari",
+                        options = listOf("Z B Y E A B N", "BEN ZAYB", "SIMOUN", "BASILIO"),
+                        correctAnswer = 0 // BEN ZAYB
+                    ),
+                    QuizQuestion(
+                        question = "Ang bumuo ng panukala at naghanda ng habla laban sa mag-aalahas",
+                        options = listOf("D I N S O C O T U O D", "DON CUSTODIO", "DON TIBURCIO", "KAPITAN TIYAGO"),
+                        correctAnswer = 0 // DON CUSTODIO
+                    )
+
+                ),
+                false),
             Datas(36,R.drawable.chapter_37, R.string.kabanata_37, R.string.kabanata_37_content,
         R.raw.kabanata_37, quizQuestions = listOf(
                     QuizQuestion(
