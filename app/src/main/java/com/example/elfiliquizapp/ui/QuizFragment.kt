@@ -1,5 +1,6 @@
 package com.example.elfiliquizapp.ui
 
+import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.app.ProgressDialog
 import android.os.Bundle
@@ -9,18 +10,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.elfiliquizapp.R
 import com.example.elfiliquizapp.adapter.QuizAdapter
 import com.example.elfiliquizapp.database.ElfiliDatabase
 import com.example.elfiliquizapp.database.StatusDao
 import com.example.elfiliquizapp.databinding.FragmentQuizBinding
 import com.example.elfiliquizapp.table.QuizQuestion
 import com.example.elfiliquizapp.database.UserPointsDao
+import com.example.elfiliquizapp.databinding.DialogGlossaryBinding
 import com.example.elfiliquizapp.table.UserPoints
 import com.example.elfiliquizapp.viewmodels.HomeViewModel2
 import kotlinx.coroutines.Dispatchers
@@ -88,12 +88,13 @@ class QuizFragment : Fragment() {
         }
 
         binding.submitButton.setOnClickListener {
-            progressDialog.setMessage("Calculating Correct Answers...")
+            progressDialog.setMessage("Kinakalkula ang Tamang Mga Sagot...")
             progressDialog.show()
             Handler().postDelayed({
 
                 val correctAnswers = evaluateAnswers()
-                Toast.makeText(requireContext(), "You got $correctAnswers correct answers!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "Ikaw ay Nakakuha ng $correctAnswers tamang sagot!", Toast.LENGTH_SHORT).show()
+                showGlossaryDialog(correctAnswers)
                 updateUserPoints(correctAnswers)
                 lifecycleScope.launch(Dispatchers.IO) {
                     statusDao.updateStatusById(newPosition.toLong(), true)
@@ -104,11 +105,22 @@ class QuizFragment : Fragment() {
             findNavController().navigateUp()
         }
     }
+    @SuppressLint("SetTextI18n")
+    private fun showGlossaryDialog(correctAnswers: Int) {
+        val dialogView = DialogGlossaryBinding.inflate(layoutInflater)
+        dialogView.dialogTitle.text = "Mabuhay!"
+        dialogView.dialogDescription.text = "Ikaw ay Nakakuha ng $correctAnswers tamang sagot!${if (correctAnswers != 1) "s" else ""}!"
+
+        AlertDialog.Builder(requireContext())
+            .setView(dialogView.root)
+            .setPositiveButton("OK", null)
+            .show()
+    }
 
     private fun showAlreadyTakenDialog() {
         val builder = AlertDialog.Builder(requireContext())
-        builder.setTitle("Quiz Already Taken")
-            .setMessage("You have already taken this quiz.")
+        builder.setTitle("Nakumpleto na ang Pagsusulit.")
+            .setMessage("Nakumpleto mo na ang pagsusulit na ito.")
             .setPositiveButton("OK") { _, _ ->
                 findNavController().navigateUp()
             }

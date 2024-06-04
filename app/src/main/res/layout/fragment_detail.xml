@@ -94,39 +94,69 @@
         android:textAlignment="center"
         android:textColor="@color/black"
         android:textSize="25sp"
+        android:textAllCaps="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
-
-    <ScrollView
-        android:id="@+id/scrollView2"
+    <androidx.cardview.widget.CardView
         android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:scrollbars="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="10dp"
+        android:layout_height="0dp"    app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
+        app:cardCornerRadius="20dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/sekkbar">
-
-        <TextView
-            android:id="@+id/textContent"
-            android:layout_width="match_parent"
+        <ScrollView
+            android:id="@+id/scrollView2"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="10dp"
-            android:textColor="@color/white"
-            android:fontFamily="@font/medium"
-            android:paddingBottom="10dp"
             android:scrollbars="vertical"
-            android:textAlignment="textStart"
-            android:textSize="16sp" />
-    </ScrollView>
+            >
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/ASD"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="10dp"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/bold"
+                    android:scrollbars="vertical"
+                    android:paddingStart="20dp"
+                    android:text="TALASALITAAN AT KWENTO"
+                    android:textAlignment="textStart"
+                    android:textSize="16sp" />
+                <TextView
+                    android:id="@+id/textContent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:textColor="@color/black"
+                    android:paddingStart="20dp"
+                    android:paddingEnd="20dp"
+                    android:fontFamily="@font/poppins_light"
+                    android:paddingBottom="10dp"
+                    android:text="@string/kabanata_1_content"
+                    android:scrollbars="vertical"
+                    android:textAlignment="textStart"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+        </ScrollView>
+    </androidx.cardview.widget.CardView>
+
 
     <SeekBar
         android:id="@+id/sekkbar"
         android:layout_width="300dp"
+        android:layout_marginTop="10dp"
         android:layout_height="wrap_content"
+        android:thumbTint="@android:color/white"
+        android:progressTint="@android:color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"

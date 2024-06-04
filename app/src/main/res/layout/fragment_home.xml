@@ -12,17 +12,18 @@
         android:id="@+id/tvTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:elevation="20dp"
-        android:fontFamily="@font/bold"
+        android:fontFamily="@font/fe3"
         android:maxLines="2"
         android:padding="5dp"
         android:text="EL FILI EXPRESS"
-        android:textAlignment="center"
 
+        android:textAlignment="center"
         android:textColor="@color/white"
-        android:textSize="40sp"
+        android:textSize="35sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -30,14 +31,14 @@
         android:id="@+id/search"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:queryHint="Search"
-        android:background="@drawable/cardview"
         android:layout_marginHorizontal="30dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/cardview"
+        android:queryHint="Search"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:shapeAppearance="@style/ShapeAppearanceOverlay.Avatar"
-    app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvTitle" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvTitle"
+        app:shapeAppearance="@style/ShapeAppearanceOverlay.Avatar" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/cropRecycler1"

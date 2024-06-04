@@ -80,7 +80,7 @@ class NavFragment : Fragment() {
                 val points = userPoints.points
                 // Now you can use the points as needed
                 // For example, update a TextView to display the points
-                binding.points.text = "Points: $points"
+                binding.points.text = "Stars: $points"
             } else {
                 // User points not found
                 // Handle this case if needed

@@ -3,15 +3,15 @@
     <item
         android:id="@+id/navigation_HomeAdmin"
         android:icon="@drawable/baseline_home_24"
-        android:title="Home" />
+        android:title="Mga Kwento" />
     <item
         android:id="@+id/navigation_ViewAll"
         android:icon="@drawable/baseline_search_24"
-        android:title="Vocabulary"/>
+        android:title="Talasalitaan"/>
 
     <item
         android:id="@+id/navigation_profileAdmin"
         android:icon="@drawable/info"
-        android:title="About App"/>
+        android:title="Tungkol Sa App"/>
 
 </menu>

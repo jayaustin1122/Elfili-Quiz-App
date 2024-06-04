@@ -15,7 +15,7 @@
             android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/bold"
+            android:fontFamily="@font/fe3"
             android:paddingStart="20dp"
             android:text="Title"
             android:textColor="@color/black"
